@@ -1,6 +1,7 @@
 package com.websystique.springmvc.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -9,7 +10,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "dbo.tasks")
-public class Task {
+public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -39,6 +40,12 @@ public class Task {
     private User taskCreator;
 
     public Task() {
+    }
+
+    public Task(String taskName, String taskDesription, Date createDate) {
+        this.taskName = taskName;
+        this.taskDesription = taskDesription;
+        this.createDate = createDate;
     }
 
     @Override

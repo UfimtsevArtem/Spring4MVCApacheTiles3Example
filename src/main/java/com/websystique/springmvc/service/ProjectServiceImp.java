@@ -5,6 +5,7 @@ import com.websystique.springmvc.domain.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
 import java.util.Collection;
@@ -31,6 +32,12 @@ public class ProjectServiceImp implements ProjectService {
     public void updateProject(Long project_id, Project project) throws SQLException {
         projectDao.updateProject(project_id, project);
     }
+    @Transactional
+    @Override
+    public void saveProject(Project project) throws SQLException {
+        projectDao.saveProject(project);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Project getProjectById(Long project_id) throws SQLException {

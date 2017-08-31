@@ -15,4 +15,5 @@ public interface ProjectDao {
     Project getProjectById(Long project_id) throws SQLException;
     Collection getAllProjects() throws SQLException;
     void deleteProject(Project project) throws SQLException;
+    void saveProject(Project project) throws SQLException;
 }

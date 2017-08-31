@@ -67,5 +67,6 @@
 
 <!-- Custom scripts for this template -->
 <script src="/resources/js/sb-admin.min.js"></script>
+<script src="/resources/js/common.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.websystique.springmvc.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -9,33 +10,94 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "dbo.projects")
-public class Project {
+public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long projectId;
+    private Long projectId = null;
     @Column(name = "project_name")
     private String projectName;
     @Column(name = "project_description")
     private String projectDescription;
     @Column(name = "create_date")
     @Temporal(value = TemporalType.DATE)
-    private Date createDate;
+    private Date createDate = new Date();
     @OneToOne
     @JoinColumn(name = "project_creator_id")
-    private User projectCreator;
+    private User projectCreator = null;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "project_workers",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") })
-    private Set<User> workers;
+    private Set<User> workers = null;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "project_tasks",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "task_id") })
-    private Set<Task> tasks;
+    private Set<Task> tasks = null;
 
     public Project() {
+    }
+
+    public Project(String projectName, String projectDescription) {
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription() {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public User getProjectCreator() {
+        return projectCreator;
+    }
+
+    public void setProjectCreator(User projectCreator) {
+        this.projectCreator = projectCreator;
+    }
+
+    public Set<User> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(Set<User> workers) {
+        this.workers = workers;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override

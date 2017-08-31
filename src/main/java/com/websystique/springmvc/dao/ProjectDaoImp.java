@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by ufimtsev on 29.08.2017.
@@ -33,14 +34,22 @@ public class ProjectDaoImp implements ProjectDao {
     }
 
     @Override
+    public void saveProject(Project project) throws SQLException {
+        sessionFactory.getCurrentSession().save(project);
+    }
+
+    @Override
     public Project getProjectById(Long project_id) throws SQLException {
         return sessionFactory.getCurrentSession().load(Project.class, project_id);
     }
+
 
     @Override
     public Collection getAllProjects() throws SQLException {
         @SuppressWarnings("unchecked")
         TypedQuery<Project> query=sessionFactory.getCurrentSession().createQuery("from Project");
+        List<Project> projects = query.getResultList();
+        projects.size();
         return query.getResultList();
     }
 

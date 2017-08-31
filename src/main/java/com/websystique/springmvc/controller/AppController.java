@@ -1,15 +1,19 @@
 package com.websystique.springmvc.controller;
 
 import com.websystique.springmvc.domain.Project;
+import com.websystique.springmvc.domain.Task;
 import com.websystique.springmvc.service.ProjectService;
+import com.websystique.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -17,39 +21,63 @@ import java.util.List;
 public class AppController {
     @Autowired
     ProjectService projectService;
+    UserService userService;
 
-	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
+	@GetMapping(value = { "/"})
+	public String homePage(ModelMap model) throws SQLException {
+		List<Project> projects = (List) projectService.getAllProjects();
+		model.addAttribute("projects", projects);
 		return "home";
 	}
+	@GetMapping(value = { "/editProject"})
+	public String editProject(@RequestParam("id")Long id, ModelMap model) throws SQLException {
+		Project project = projectService.getProjectById(id);
 
-	@RequestMapping(value = { "/products"}, method = RequestMethod.GET)
+		Set<Task> tasks = project.getTasks();
+		tasks.add(new Task("taskname1","description1", new Date()));
+		tasks.add(new Task("taskname2","description2", new Date()));
+		tasks.add(new Task("taskname3","description3", new Date()));
+		tasks.add(new Task("taskname4","description4", new Date()));
+		tasks.add(new Task("taskname5","description5", new Date()));
+		project.setTasks(tasks);
+		model.addAttribute("project", project);
+		return "editProject";
+	}
+	@GetMapping(value = { "/addProject"})
+	public String addProject(ModelMap model) throws SQLException {
+		return "addProject";
+	}
+
+	@PostMapping(value = "/addProject.do", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Long addProjectForm(@RequestBody Project project) throws SQLException {
+		project.setProjectCreator(userService.getUserById(1l));
+		projectService.saveProject(project);
+		return project.getProjectId();
+	}
+
+	@GetMapping(value = { "/products"})
 	public String productsPage(ModelMap model) {
 		return "products";
 	}
 
-	@RequestMapping(value = { "/contactus"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/contactus"})
 	public String contactUsPage(ModelMap model) {
 		return "contactus";
 	}
-	@RequestMapping(value = { "/login"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/login"})
 	public String login(ModelMap model) {
 		return "pages/login";
 	}
-	@RequestMapping(value = { "/register"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/register"})
 	public String register(ModelMap model) {
 		return "pages/register";
 	}
-	@RequestMapping(value = { "/forgot-password"}, method = RequestMethod.GET)
+	@GetMapping(value = { "/forgot-password"})
 	public String forgotPassword(ModelMap model) {
 		return "pages/forgot-password";
 	}
-	@RequestMapping(value = { "/blank"}, method = RequestMethod.GET)
-	public String blank(ModelMap model) {
-		return "pages/blank";
-	}
 
-    @RequestMapping(value = { "/getListProject.do"}, method = RequestMethod.GET)
+    @GetMapping(value = { "/getListProject.do"})
     public List<Project> getListProject(ModelMap model) throws SQLException{
 	    return (List)projectService.getAllProjects();
     }

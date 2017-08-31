@@ -1,13 +1,14 @@
 package com.websystique.springmvc.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by ufimtsev on 29.08.2017.
  */
 @Entity
 @Table(name = "dbo.status")
-public class Status {
+public class Status implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -1,26 +1,26 @@
 <d<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-	<a class="navbar-brand" href="#">Start Bootstrap</a>
+	<a class="navbar-brand" href="/">Project Manager</a>
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarResponsive">
 		<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 			<li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-				<a class="nav-link" href="#">
+				<a class="nav-link" href="/">
 					<i class="fa fa-fw fa-dashboard"></i>
 					<span class="nav-link-text">
-                Dashboard</span>
+                My Projects</span>
 				</a>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts" hidden="hidden">
 				<a class="nav-link" href="#">
 					<i class="fa fa-fw fa-area-chart"></i>
 					<span class="nav-link-text">
                 Charts</span>
 				</a>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables" hidden="hidden">
 				<a class="nav-link" href="#">
 					<i class="fa fa-fw fa-table"></i>
 					<span class="nav-link-text">
@@ -31,18 +31,18 @@
 				<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
 					<i class="fa fa-fw fa-wrench"></i>
 					<span class="nav-link-text">
-                Components</span>
+                Projects</span>
 				</a>
 				<ul class="sidenav-second-level collapse" id="collapseComponents">
 					<li>
-						<a href="static-nav.html">Static Navigation</a>
+						<a href="/addProject">Add new project</a>
 					</li>
-					<li>
+					<%--<li>
 						<a href="#">Custom Card Examples</a>
-					</li>
+					</li>--%>
 				</ul>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages" hidden="hidden">
 				<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
 					<i class="fa fa-fw fa-file"></i>
 					<span class="nav-link-text">
@@ -63,7 +63,7 @@
 					</li>
 				</ul>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels" hidden="hidden">
 				<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
 					<i class="fa fa-fw fa-sitemap"></i>
 					<span class="nav-link-text">
@@ -89,7 +89,7 @@
 					</li>
 				</ul>
 			</li>
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link" hidden="hidden">
 				<a class="nav-link" href="#">
 					<i class="fa fa-fw fa-link"></i>
 					<span class="nav-link-text">
@@ -104,8 +104,8 @@
 				</a>
 			</li>
 		</ul>
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item dropdown">
+		<ul class="navbar-nav ml-auto" >
+			<li class="nav-item dropdown" hidden="hidden">
 				<a class="nav-link dropdown-toggle mr-lg-2" href="#" id="messagesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="fa fa-fw fa-envelope"></i>
 					<span class="d-lg-none">Messages
@@ -142,7 +142,7 @@
 					</a>
 				</div>
 			</li>
-			<li class="nav-item dropdown">
+			<li class="nav-item dropdown" hidden="hidden">
 				<a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="fa fa-fw fa-bell"></i>
 					<span class="d-lg-none">Alerts
