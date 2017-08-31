@@ -488,27 +488,31 @@
                     <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Project id</th>
-                            <th>Project Name</th>
-                            <th>Project Creator</th>
+                            <th>Task id</th>
+                            <th>Task Name</th>
+                            <th>Task Creator</th>
                             <th>Create date</th>
                             <th>Desription</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Project id</th>
-                            <th>Project Name</th>
-                            <th>Project Creator</th>
+                            <th>Task id</th>
+                            <th>Task Name</th>
+                            <th>Task Creator</th>
                             <th>Create date</th>
                             <th>Desription</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <c:forEach items="${project}" var="project">
-                            <c:url var="editUrl" value="/editTask?id=${project.id}" />
+                        <c:forEach items="${tasks}" var="task">
+                            <c:url var="editUrl" value="/editTask?id=${task.taskId}" />
                             <tr>
-
+                                <td><c:out value="${task.taskId}"/></td>
+                                <td><a href="${editUrl}"><c:out value="${project.projectName}"/></a></td>
+                                <td><c:out value="${task.taskCreator.firstName} ${task.taskCreator.lastName} "/></td>
+                                <td><c:out value="${task.createDate}"/></td>
+                                <td><c:out value="${task.taskDescription}"/></td>
                             </tr>
 
                         </c:forEach>

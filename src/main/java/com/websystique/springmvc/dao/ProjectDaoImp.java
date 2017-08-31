@@ -40,14 +40,18 @@ public class ProjectDaoImp implements ProjectDao {
 
     @Override
     public Project getProjectById(Long project_id) throws SQLException {
-        return sessionFactory.getCurrentSession().load(Project.class, project_id);
+        @SuppressWarnings("unchecked")
+        TypedQuery<Project> query=sessionFactory.getCurrentSession().createQuery("Select p from Project p left join fetch p.tasks left join fetch p.workers where p.projectId = :id");
+        query.setParameter("id", project_id);
+        Project project = query.getSingleResult();
+        return project;
     }
 
 
     @Override
     public Collection getAllProjects() throws SQLException {
         @SuppressWarnings("unchecked")
-        TypedQuery<Project> query=sessionFactory.getCurrentSession().createQuery("from Project");
+        TypedQuery<Project> query=sessionFactory.getCurrentSession().createQuery("Select p from Project p left join fetch p.tasks left join fetch p.workers");
         List<Project> projects = query.getResultList();
         projects.size();
         return query.getResultList();

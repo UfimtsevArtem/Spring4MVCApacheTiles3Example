@@ -34,7 +34,9 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserById(Long user_id) throws SQLException {
-        return sessionFactory.getCurrentSession().load(User.class, user_id);
+        User user = sessionFactory.getCurrentSession().load(User.class, user_id);
+        user.getRole();
+        return user;
     }
 
     @Override

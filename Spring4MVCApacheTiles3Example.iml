@@ -16,7 +16,9 @@
         <datasource-map>
           <unit-entry name="getSessionFactory" />
         </datasource-map>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="getSessionFactory" />
+        </naming-strategy-map>
       </configuration>
     </facet>
   </component>

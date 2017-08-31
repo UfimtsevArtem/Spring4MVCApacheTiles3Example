@@ -1,0 +1,12 @@
+.idea/
+
+*.classes
+*.jar
+
+out/
+
+target/
+
+*.iml
+
+Spring4MVCApacheTiles3Example/src/main/resources/db.properties

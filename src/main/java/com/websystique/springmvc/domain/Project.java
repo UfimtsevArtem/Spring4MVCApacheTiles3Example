@@ -25,12 +25,12 @@ public class Project implements Serializable {
     @OneToOne
     @JoinColumn(name = "project_creator_id")
     private User projectCreator = null;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "project_workers",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") })
     private Set<User> workers = null;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "project_tasks",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "task_id") })

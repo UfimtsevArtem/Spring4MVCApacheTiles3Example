@@ -506,7 +506,7 @@
                         </tfoot>
                         <tbody>
                         <c:forEach items="${projects}" var="project">
-                            <c:url var="editUrl" value="//editProject?id=${project.projectId}" />
+                            <c:url var="editUrl" value="/editProject?id=${project.projectId}" />
                             <tr>
                                 <td><c:out value="${project.projectId}"/></td>
                                 <td><a href="${editUrl}"><c:out value="${project.projectName}"/></a></td>

@@ -21,6 +21,7 @@ import java.util.Set;
 public class AppController {
     @Autowired
     ProjectService projectService;
+    @Autowired
     UserService userService;
 
 	@GetMapping(value = { "/"})
@@ -40,7 +41,9 @@ public class AppController {
 		tasks.add(new Task("taskname4","description4", new Date()));
 		tasks.add(new Task("taskname5","description5", new Date()));
 		project.setTasks(tasks);
+		projectService.updateProject(id,project);
 		model.addAttribute("project", project);
+		model.addAttribute("tasks", project.getTasks());
 		return "editProject";
 	}
 	@GetMapping(value = { "/addProject"})
