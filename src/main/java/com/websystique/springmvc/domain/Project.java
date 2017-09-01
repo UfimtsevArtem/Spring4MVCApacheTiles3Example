@@ -16,15 +16,15 @@ public class Project implements Serializable {
     @Column(name = "id")
     private Long projectId = null;
     @Column(name = "project_name")
-    private String projectName;
+    private String projectName = null;
     @Column(name = "project_description")
-    private String projectDescription;
+    private String projectDescription = null;
     @Column(name = "create_date")
     @Temporal(value = TemporalType.DATE)
     private Date createDate = new Date();
     @OneToOne
-    @JoinColumn(name = "project_creator_id")
-    private User projectCreator = null;
+    @JoinColumn(name = "project_creator_id",updatable = false)
+    private User projectCreator;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "project_workers",
             joinColumns = { @JoinColumn(name = "project_id") },
@@ -42,6 +42,23 @@ public class Project implements Serializable {
     public Project(String projectName, String projectDescription) {
         this.projectName = projectName;
         this.projectDescription = projectDescription;
+    }
+
+    public Project(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public Project(Long projectId, String projectName, String projectDescription) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+    }
+
+    public Project(Long projectId, String projectName, String projectDescription, User projectCreator) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.projectCreator = projectCreator;
     }
 
     public Long getProjectId() {

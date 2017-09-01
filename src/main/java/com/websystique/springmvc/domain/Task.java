@@ -18,7 +18,7 @@ public class Task implements Serializable {
     @Column(name = "task_name")
     private String taskName;
     @Column(name = "task_descripton")
-    private String taskDesription;
+    private String taskDescription;
     @Column(name = "create_date")
     @Temporal(value = TemporalType.DATE)
     private Date createDate;
@@ -42,10 +42,75 @@ public class Task implements Serializable {
     public Task() {
     }
 
-    public Task(String taskName, String taskDesription, Date createDate) {
+    public Task(String taskName, String taskDescription, Date createDate, User taskCreator) {
         this.taskName = taskName;
-        this.taskDesription = taskDesription;
+        this.taskDescription = taskDescription;
         this.createDate = createDate;
+        this.taskCreator = taskCreator;
+    }
+
+    public Long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Set<User> getWorkers() {
+        return workers;
+    }
+
+    public void setWorkers(Set<User> workers) {
+        this.workers = workers;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public User getTaskCreator() {
+        return taskCreator;
+    }
+
+    public void setTaskCreator(User taskCreator) {
+        this.taskCreator = taskCreator;
     }
 
     @Override
@@ -53,7 +118,7 @@ public class Task implements Serializable {
         return "Task{" +
                 "taskId=" + taskId +
                 ", taskName='" + taskName + '\'' +
-                ", taskDesription='" + taskDesription + '\'' +
+                ", taskDesription='" + taskDescription + '\'' +
                 ", createDate=" + createDate +
                 ", status=" + status +
                 ", workers=" + workers +
@@ -71,7 +136,7 @@ public class Task implements Serializable {
 
         if (taskId != null ? !taskId.equals(task.taskId) : task.taskId != null) return false;
         if (taskName != null ? !taskName.equals(task.taskName) : task.taskName != null) return false;
-        if (taskDesription != null ? !taskDesription.equals(task.taskDesription) : task.taskDesription != null)
+        if (taskDescription != null ? !taskDescription.equals(task.taskDescription) : task.taskDescription != null)
             return false;
         if (createDate != null ? !createDate.equals(task.createDate) : task.createDate != null) return false;
         if (status != null ? !status.equals(task.status) : task.status != null) return false;
@@ -84,7 +149,7 @@ public class Task implements Serializable {
     public int hashCode() {
         int result = taskId != null ? taskId.hashCode() : 0;
         result = 31 * result + (taskName != null ? taskName.hashCode() : 0);
-        result = 31 * result + (taskDesription != null ? taskDesription.hashCode() : 0);
+        result = 31 * result + (taskDescription != null ? taskDescription.hashCode() : 0);
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (workers != null ? workers.hashCode() : 0);

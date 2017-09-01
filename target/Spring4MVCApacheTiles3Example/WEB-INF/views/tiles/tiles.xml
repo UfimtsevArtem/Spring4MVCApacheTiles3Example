@@ -29,6 +29,10 @@
        <put-attribute name="title" value="Edit Project" />
        <put-attribute name="body" value="/WEB-INF/views/pages/editProject.jsp" />
    </definition>
+    <definition name="showProject" extends="base-definition">
+       <put-attribute name="title" value="Edit Project" />
+       <put-attribute name="body" value="/WEB-INF/views/pages/showProject.jsp" />
+   </definition>
     <definition name="addProject" extends="base-definition">
        <put-attribute name="title" value="Add Project" />
        <put-attribute name="body" value="/WEB-INF/views/pages/addProject.jsp" />

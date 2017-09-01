@@ -2,6 +2,7 @@ package com.websystique.springmvc.dao;
 
 
 import com.websystique.springmvc.domain.Project;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.Collection;
@@ -16,4 +17,5 @@ public interface ProjectDao {
     Collection getAllProjects() throws SQLException;
     void deleteProject(Project project) throws SQLException;
     void saveProject(Project project) throws SQLException;
+    Query<Project> createQuery(String hql);
 }

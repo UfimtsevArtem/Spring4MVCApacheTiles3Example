@@ -1,5 +1,8 @@
 package com.websystique.springmvc.domain;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -35,6 +38,16 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.role = role;
+    }
+
+    public User(Long userId, String firstName, String lastName, String email, String password, Date createDate, Role role) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.createDate = createDate;
         this.role = role;
     }
 
@@ -106,7 +119,7 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", createDate=" + createDate +
-               // ", role=" + role +
+                ", role=" + role +
                 '}';
     }
 

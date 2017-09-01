@@ -2,10 +2,10 @@ package com.websystique.springmvc.service;
 
 import com.websystique.springmvc.dao.ProjectDao;
 import com.websystique.springmvc.domain.Project;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
 import java.util.Collection;
@@ -32,6 +32,13 @@ public class ProjectServiceImp implements ProjectService {
     public void updateProject(Long project_id, Project project) throws SQLException {
         projectDao.updateProject(project_id, project);
     }
+
+    @Override
+    public void updateProjectWithParams(Project project) throws SQLException {
+        Query<Project> query=projectDao.createQuery("UPDATE PROJECT p SET p.namesadfdsa=:name");
+        query.setParameter("name",project.getProjectName());
+    }
+
     @Transactional
     @Override
     public void saveProject(Project project) throws SQLException {

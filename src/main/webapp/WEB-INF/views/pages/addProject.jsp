@@ -23,16 +23,16 @@
             <div class="card-body">
                 <h4 class="card-title">Add Project</h4>
                 <p class="card-text">Write project name and his description.</p>
-                <form id="add-project-form">
+                <form class="add-project-form-add">
                     <div class="form-group">
                         <label class="form-control-label" for="formGroupExampleInput">project name: </label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Name" id="project-name-inpt" name="projectName">
+                        <input type="text" class="form-control project-name-inpt" id="formGroupExampleInput" placeholder="Name" name="projectName">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">project description: </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"placeholder="Description" id="project-desc-inpt" name="projectDescription"></textarea>
+                        <textarea class="form-control project-desc-inpt" id="exampleFormControlTextarea1" rows="3"placeholder="Description" name="projectDescription"></textarea>
                     </div>
-                    <button type="button" class="btn btn-outline-success" id="add-project-btn">Add</button>
+                    <button type="button" class="btn btn-outline-success add-project-btn" id="">Add</button>
                 </form>
             </div>
         </div>

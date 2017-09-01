@@ -12,6 +12,7 @@ import java.util.Collection;
 public interface ProjectService {
     void addProject(Project project) throws SQLException;
     void updateProject(Long project_id, Project project) throws SQLException;
+    void updateProjectWithParams(Project project) throws SQLException;
     Project getProjectById(Long project_id) throws SQLException;
     Collection getAllProjects() throws SQLException;
     void deleteProject(Project project) throws SQLException;

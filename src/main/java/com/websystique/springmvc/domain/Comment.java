@@ -26,6 +26,38 @@ public class Comment implements Serializable{
     public Comment() {
     }
 
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getCommentText() {
+        return commentText;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public User getCommentUser() {
+        return commentUser;
+    }
+
+    public void setCommentUser(User commentUser) {
+        this.commentUser = commentUser;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

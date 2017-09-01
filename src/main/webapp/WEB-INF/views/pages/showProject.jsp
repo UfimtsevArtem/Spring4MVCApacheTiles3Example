@@ -488,37 +488,31 @@
                     <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
                         <thead>
                         <tr>
-                            <th>Project id</th>
-                            <th>Project Name</th>
-                            <th>Project Creator</th>
+                            <th>Task id</th>
+                            <th>Task Name</th>
+                            <th>Task Creator</th>
                             <th>Create date</th>
                             <th>Desription</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
-                            <th>Project id</th>
-                            <th>Project Name</th>
-                            <th>Project Creator</th>
+                            <th>Task id</th>
+                            <th>Task Name</th>
+                            <th>Task Creator</th>
                             <th>Create date</th>
                             <th>Desription</th>
-                            <th>Action</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <c:forEach items="${projects}" var="project">
-                            <c:url var="editUrl" value="/showProject?id=${project.projectId}" />
-                            <tr id="${project.projectId}">
-                                <td><c:out value="${project.projectId}"/></td>
-                                <td><a href="${editUrl}"><c:out value="${project.projectName}"/></a></td>
-                                <td><c:out value="${project.projectCreator.firstName} ${project.projectCreator.lastName} "/></td>
-                                <td><c:out value="${project.createDate}"/></td>
-                                <td><c:out value="${project.projectDescription}"/></td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-primary edit-project-btn-index" id="${project.projectId}" name="projectId" value="${project.projectId}" href="/editProject?id=${project.projectId}">Edit</button>
-                                    <button type="button" class="btn btn-outline-danger delete-project-btn" id="${project.projectId}" name="projectId" value="${project.projectId}">Delete</button>
-                                </td>
+                        <c:forEach items="${tasks}" var="task">
+                            <c:url var="editUrl" value="/editTask?id=${task.taskId}" />
+                            <tr>
+                                <td><c:out value="${task.taskId}"/></td>
+                                <td><a href="${editUrl}"><c:out value="${task.taskName}"/></a></td>
+                                <td><c:out value="${task.taskCreator.firstName} ${task.taskCreator.lastName} "/></td>
+                                <td><c:out value="${task.createDate}"/></td>
+                                <td><c:out value="${task.taskDescription}"/></td>
                             </tr>
 
                         </c:forEach>

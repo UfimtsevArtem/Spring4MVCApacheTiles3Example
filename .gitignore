@@ -9,4 +9,4 @@ target/
 
 *.iml
 
-Spring4MVCApacheTiles3Example/src/main/resources/db.properties
+*db.properties

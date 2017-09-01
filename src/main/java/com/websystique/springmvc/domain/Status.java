@@ -19,6 +19,22 @@ public class Status implements Serializable {
     public Status() {
     }
 
+    public Long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
     @Override
     public String toString() {
         return "Status{" +
