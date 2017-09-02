@@ -31,38 +31,14 @@ public class ProjectDaoImp implements ProjectDao {
         sessionFactory.getCurrentSession().save(project);
     }
 
-    @Override
-    public void updateProject(Long project_id, Project project) throws SQLException {
+    public void saveOrUpdateProject(Project project) throws SQLException{
         sessionFactory.getCurrentSession().saveOrUpdate(project);
     }
 
-    @Override
-    public void saveProject(Project project) throws SQLException {
-        sessionFactory.getCurrentSession().save(project);
-    }
 
     @Override
-    public Query<Project> createQuery(String hql) {
-        return sessionFactory.getCurrentSession().createQuery(hql,Project.class);
-    }
-
-    @Override
-    public Project getProjectById(Long project_id) throws SQLException {
-        @SuppressWarnings("unchecked")
-        TypedQuery<Project> query=sessionFactory.getCurrentSession().createQuery("Select p from Project p left join fetch p.tasks left join fetch p.workers where p.projectId = :id");
-        query.setParameter("id", project_id);
-        Project project = query.getSingleResult();
-        return project;
-    }
-
-
-    @Override
-    public Collection getAllProjects() throws SQLException {
-        @SuppressWarnings("unchecked")
-        TypedQuery<Project> query=sessionFactory.getCurrentSession().createQuery("Select distinct p from Project p left join fetch p.tasks left join fetch p.workers");
-        List<Project> projects = query.getResultList();
-        projects.size();
-        return query.getResultList();
+    public Query createQuery(String hql) {
+        return sessionFactory.getCurrentSession().createQuery(hql);
     }
 
     @Override

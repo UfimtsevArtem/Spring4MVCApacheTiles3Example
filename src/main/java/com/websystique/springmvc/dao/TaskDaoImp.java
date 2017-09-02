@@ -2,6 +2,7 @@ package com.websystique.springmvc.dao;
 
 import com.websystique.springmvc.domain.Task;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -46,5 +47,9 @@ public class TaskDaoImp implements TaskDao {
     @Override
     public void deleteTask(Task task) throws SQLException {
         sessionFactory.getCurrentSession().delete(task);
+    }
+    @Override
+    public Query createQuery(String hql) {
+        return sessionFactory.getCurrentSession().createQuery(hql);
     }
 }

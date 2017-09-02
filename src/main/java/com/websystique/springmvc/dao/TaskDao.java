@@ -3,6 +3,7 @@ package com.websystique.springmvc.dao;
 
 
 import com.websystique.springmvc.domain.Task;
+import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 import java.util.Collection;
@@ -16,4 +17,5 @@ public interface TaskDao {
     Task getTaskById(Long task_id) throws SQLException;
     Collection getAllTasks() throws SQLException;
     void deleteTask(Task task) throws SQLException;
+    Query createQuery(String hql);
 }

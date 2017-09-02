@@ -23,14 +23,14 @@ public class Project implements Serializable {
     @Temporal(value = TemporalType.DATE)
     private Date createDate = new Date();
     @OneToOne
-    @JoinColumn(name = "project_creator_id",updatable = false)
+    @JoinColumn(name = "project_creator_id")
     private User projectCreator;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "project_workers",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id") })
     private Set<User> workers = null;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "project_tasks",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "task_id") })

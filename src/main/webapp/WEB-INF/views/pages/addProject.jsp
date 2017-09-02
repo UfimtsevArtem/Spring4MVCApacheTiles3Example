@@ -33,6 +33,7 @@
                         <textarea class="form-control project-desc-inpt" id="exampleFormControlTextarea1" rows="3"placeholder="Description" name="projectDescription"></textarea>
                     </div>
                     <button type="button" class="btn btn-outline-success add-project-btn" id="">Add</button>
+                    <button type="button" class="btn btn-outline-secondary cancel-project-btn">Cancel</button>
                 </form>
             </div>
         </div>

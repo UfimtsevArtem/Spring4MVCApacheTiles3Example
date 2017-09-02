@@ -2,6 +2,7 @@ package com.websystique.springmvc.service;
 
 import com.websystique.springmvc.dao.TaskDao;
 import com.websystique.springmvc.domain.Task;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,10 @@ public class TaskServiceImp implements TaskService {
     @Transactional(readOnly = true)
     @Override
     public Task getTaskById(Long task_id) throws SQLException {
-        return taskDao.getTaskById(task_id);
+        Query<Task> query=taskDao.createQuery("Select t from Task t left join fetch t.comments left join fetch t.workers where t.taskId = :id");
+        query.setParameter("id", task_id);
+        Task task = query.getSingleResult();
+        return task;
     }
     @Transactional(readOnly = true)
     @Override

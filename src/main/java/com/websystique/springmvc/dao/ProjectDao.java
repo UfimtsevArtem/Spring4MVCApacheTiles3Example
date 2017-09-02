@@ -12,10 +12,7 @@ import java.util.Collection;
  */
 public interface ProjectDao {
     void addProject(Project project) throws SQLException;
-    void updateProject(Long project_id, Project project) throws SQLException;
-    Project getProjectById(Long project_id) throws SQLException;
-    Collection getAllProjects() throws SQLException;
     void deleteProject(Project project) throws SQLException;
-    void saveProject(Project project) throws SQLException;
-    Query<Project> createQuery(String hql);
+    void saveOrUpdateProject(Project project) throws SQLException;
+    Query createQuery(String hql);
 }

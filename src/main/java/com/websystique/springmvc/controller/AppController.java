@@ -4,10 +4,10 @@ import com.websystique.springmvc.domain.Project;
 import com.websystique.springmvc.domain.Task;
 import com.websystique.springmvc.domain.User;
 import com.websystique.springmvc.service.ProjectService;
+import com.websystique.springmvc.service.TaskService;
 import com.websystique.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +26,8 @@ public class AppController {
     ProjectService projectService;
     @Autowired
     UserService userService;
+    @Autowired
+	TaskService taskService;
 
 	@GetMapping(value = { "/"})
 	public String homePage(ModelMap model) throws SQLException {
@@ -36,12 +38,6 @@ public class AppController {
 	@GetMapping(value = { "/showProject"})
 	public String showProject(@RequestParam("id")Long id, ModelMap model) throws SQLException {
 		Project project = projectService.getProjectById(id);
-		User user = userService.getUserById(1l);
-		Set<Task> tasks = project.getTasks();
-		tasks.add(new Task("taskname1","description1", new Date(), user));
-		tasks.add(new Task("taskname2","description2", new Date(), user));
-		project.setTasks(tasks);
-		projectService.updateProject(id,project);
 		model.addAttribute("project", project);
 		model.addAttribute("tasks", project.getTasks());
 		return "showProject";
@@ -50,6 +46,12 @@ public class AppController {
 	public String addProject(ModelMap model) throws SQLException {
 		return "addProject";
 	}
+	@GetMapping(value = { "/addTask"})
+	public String addTask(@RequestParam("projectId")Long id,ModelMap model) throws SQLException {
+		Project project = projectService.getProjectById(id);
+		model.addAttribute("project", project);
+		return "addTask";
+	}
 	@GetMapping(value = { "/editProject"})
 	public String editProject(@RequestParam("id")Long id, ModelMap model) throws SQLException {
 		Project project = projectService.getProjectById(id);
@@ -57,26 +59,41 @@ public class AppController {
 		return "editProject";
 	}
 
-	@PostMapping(value = "/addProject.do", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Long addProjectForm(@RequestBody Project project) throws SQLException {
+	@PostMapping(value = "/addProject.do", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> addProjectForm(@RequestBody Project project) throws SQLException {
 		project.setProjectCreator(userService.getUserById(1l));
-		projectService.saveProject(project);
-		return project.getProjectId();
+		projectService.saveOrUpdateProject(project);
+		return ResponseEntity.ok().build();
+	}
+	@PostMapping(value = "/addTask.do", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> addTaskForm(@RequestBody Task task,@RequestParam("projectId")Long id) throws SQLException {
+		Project project = projectService.getProjectById(id);
+		User user = userService.getUserById(1l);
+		task.setTaskCreator(userService.getUserById(1l));
+		task.setCreateDate(new Date());
+		task.setTaskCreator(user);
+		project.getTasks().add(task);
+		projectService.saveOrUpdateProject(project);
+		return ResponseEntity.ok().build();
 	}
 	@PostMapping(value = "/editProject.do", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> editProjectForm(@RequestBody Project project) throws SQLException {
-		projectService.updateProject(project.getProjectId(),project);
-		/*Project projectFnl = projectService.getProjectById(project.getProjectId());
-		projectFnl.setProjectName(project.getProjectName());
-		projectFnl.setProjectDescription(project.getProjectDescription());
-		projectService.updateProject(project.getProjectId(), project);*/
-
+		projectService.updateProjectWithParams(project);
 		return ResponseEntity.ok().build();
 	}
 	@PostMapping(value = "/deleteProject.do", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> deleteProject(@RequestBody Project project) throws SQLException {
 		Project projectDelete = projectService.getProjectById(project.getProjectId());
 		projectService.deleteProject(projectDelete);
+		return ResponseEntity.ok().build();
+	}
+	@PostMapping(value = "/deleteTask.do", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> deleteTask(@RequestBody Task task,@RequestParam("projectId")Long id) throws SQLException {
+		Project project = projectService.getProjectById(id);
+		Task taskFnl = taskService.getTaskById(task.getTaskId());
+		project.getTasks().remove(taskFnl);
+		projectService.saveOrUpdateProject(project);
+		taskService.deleteTask(task);
 		return ResponseEntity.ok().build();
 	}
 

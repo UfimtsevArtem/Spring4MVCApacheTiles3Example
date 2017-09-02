@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="content-wrapper">
 
@@ -479,20 +480,29 @@
 
         <!-- Example Tables Card -->
         <div class="card mb-3">
-            <div class="card-header">
+            <div class="card-header row">
+                <div class="col-9">
                 <i class="fa fa-table"></i>
-                Data Table Example
-            </div>
+                Project:<c:out value="${project.projectName}"/>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-outline-success add-task-btn-showP" name="projectId" value="${project.projectId}">Add task</button>
+                    <button type="button" class="btn btn-outline-primary edit-project-btn-showP " id="${project.projectId}" name="projectId" value="${project.projectId}">Edit</button>
+                    <button type="button" class="btn btn-outline-danger delete-project-btn-showP" id="${project.projectId}" name="projectId" value="${project.projectId}">Delete</button>
+
+                </div>
+                </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
+                    <table class="table table-hover" width="100%" id="dataTable" cellspacing="0" >
                         <thead>
                         <tr>
-                            <th>Task id</th>
+                            <th class="col-auto">Task id</th>
                             <th>Task Name</th>
                             <th>Task Creator</th>
                             <th>Create date</th>
                             <th>Desription</th>
+                            <th class="col-auto">Action</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -502,22 +512,32 @@
                             <th>Task Creator</th>
                             <th>Create date</th>
                             <th>Desription</th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                         <tbody>
                         <c:forEach items="${tasks}" var="task">
                             <c:url var="editUrl" value="/editTask?id=${task.taskId}" />
-                            <tr>
+                            <tr id="${task.taskId}">
                                 <td><c:out value="${task.taskId}"/></td>
-                                <td><a href="${editUrl}"><c:out value="${task.taskName}"/></a></td>
+                                <td data-toggle="tooltip" data-placement="bottom" title="${task.taskName}">
+                                    <a href="${editUrl}">
+                                        <c:out value="${fn:substring(task.taskName,0,20)}"/></a>
+                                </td>
                                 <td><c:out value="${task.taskCreator.firstName} ${task.taskCreator.lastName} "/></td>
                                 <td><c:out value="${task.createDate}"/></td>
-                                <td><c:out value="${task.taskDescription}"/></td>
+                                <td data-toggle="tooltip" data-placement="bottom" title="${task.taskDescription}">
+                                    <c:out value="${fn:substring(task.taskDescription,0,20)}"/></td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary edit-task-btn-showP" id="${task.taskId}" name="taskId" value="${task.taskId}">Edit</button>
+                                    <button type="button" class="btn btn-outline-danger delete-task-btn-showP" id="${task.taskId}" name="taskId" value="${task.taskId}">Delete</button>
+                                </td>
                             </tr>
 
                         </c:forEach>
                         </tbody>
                     </table>
+                    <div class="project-id-value" hidden="hidden" data-id="${project.projectId}">
                 </div>
             </div>
             <div class="card-footer small text-muted">

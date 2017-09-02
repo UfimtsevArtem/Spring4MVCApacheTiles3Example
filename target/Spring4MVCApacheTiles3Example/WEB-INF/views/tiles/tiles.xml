@@ -37,5 +37,9 @@
        <put-attribute name="title" value="Add Project" />
        <put-attribute name="body" value="/WEB-INF/views/pages/addProject.jsp" />
    </definition>
+    <definition name="addTask" extends="base-definition">
+       <put-attribute name="title" value="Add Project" />
+       <put-attribute name="body" value="/WEB-INF/views/pages/addTask.jsp" />
+   </definition>
  
 </tiles-definitions>

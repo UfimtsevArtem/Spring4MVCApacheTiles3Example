@@ -39,7 +39,8 @@
                         <label for="exampleFormControlTextarea1">project description: </label>
                         <textarea class="form-control project-desc-inpt" id="exampleFormControlTextarea1" rows="3"placeholder="${project.projectDescription}" name="projectDescription"></textarea>
                     </div>
-                    <button type="button" class="btn btn-outline-primary edit-project-btn-edit" id="">Edit</button>
+                    <button type="button" class="btn btn-outline-primary edit-project-btn-edit">Edit</button>
+                    <button type="button" class="btn btn-outline-secondary cancel-project-btn">Cancel</button>
                 </form>
             </div>
         </div>

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by ufimtsev on 29.08.2017.
@@ -29,31 +31,34 @@ public class ProjectServiceImp implements ProjectService {
     }
     @Transactional
     @Override
-    public void updateProject(Long project_id, Project project) throws SQLException {
-        projectDao.updateProject(project_id, project);
-    }
-
-    @Override
     public void updateProjectWithParams(Project project) throws SQLException {
-        Query<Project> query=projectDao.createQuery("UPDATE PROJECT p SET p.namesadfdsa=:name");
-        query.setParameter("name",project.getProjectName());
+        Query query = projectDao.createQuery("Update Project p set p.projectName = :name, p.projectDescription = :description where p.projectId = :id");
+        query.setParameter("name", project.getProjectName());
+        query.setParameter("description", project.getProjectDescription());
+        query.setParameter("id", project.getProjectId());
+        query.executeUpdate();
     }
 
     @Transactional
     @Override
-    public void saveProject(Project project) throws SQLException {
-        projectDao.saveProject(project);
+    public void saveOrUpdateProject(Project project) throws SQLException {
+        projectDao.saveOrUpdateProject(project);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Project getProjectById(Long project_id) throws SQLException {
-        return projectDao.getProjectById(project_id);
+        Query<Project> query=projectDao.createQuery("Select p from Project p left join fetch p.tasks left join fetch p.workers where p.projectId = :id");
+        query.setParameter("id", project_id);
+        Project project = query.getSingleResult();
+        return project;
     }
     @Transactional(readOnly = true)
     @Override
     public Collection getAllProjects() throws SQLException {
-        return projectDao.getAllProjects();
+        Query<Project> query=projectDao.createQuery("Select distinct p from Project p left join fetch p.tasks left join fetch p.workers");
+        List<Project> projects = query.getResultList();
+        return projects;
     }
     @Transactional
     @Override
