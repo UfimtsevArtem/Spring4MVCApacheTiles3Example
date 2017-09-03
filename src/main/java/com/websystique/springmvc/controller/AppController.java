@@ -42,6 +42,12 @@ public class AppController {
 		model.addAttribute("tasks", project.getTasks());
 		return "showProject";
 	}
+	@GetMapping(value = { "/showTask"})
+	public String showTask(@RequestParam("id")Long id, ModelMap model) throws SQLException {
+		Task task = taskService.getTaskById(id);
+		model.addAttribute("task", task);
+		return "showTask";
+	}
 	@GetMapping(value = { "/addProject"})
 	public String addProject(ModelMap model) throws SQLException {
 		return "addProject";
@@ -57,6 +63,12 @@ public class AppController {
 		Project project = projectService.getProjectById(id);
 		model.addAttribute("project", project);
 		return "editProject";
+	}
+	@GetMapping(value = { "/editTask"})
+	public String editTask(@RequestParam("id")Long id, ModelMap model) throws SQLException {
+		Task task = taskService.getTaskById(id);
+		model.addAttribute("task", task);
+		return "editTask";
 	}
 
 	@PostMapping(value = "/addProject.do", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -79,6 +91,11 @@ public class AppController {
 	@PostMapping(value = "/editProject.do", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> editProjectForm(@RequestBody Project project) throws SQLException {
 		projectService.updateProjectWithParams(project);
+		return ResponseEntity.ok().build();
+	}
+	@PostMapping(value = "/editTask.do", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> editTasktForm(@RequestBody Task task) throws SQLException {
+		taskService.updateTaskWithParams(task);
 		return ResponseEntity.ok().build();
 	}
 	@PostMapping(value = "/deleteProject.do", consumes = MediaType.APPLICATION_JSON_VALUE)

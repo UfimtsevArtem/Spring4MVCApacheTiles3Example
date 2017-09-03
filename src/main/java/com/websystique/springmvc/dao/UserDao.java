@@ -12,7 +12,7 @@ import java.util.Collection;
 public interface UserDao {
     void addUser(User user) throws SQLException;
     void updateUser(Long user_id, User user) throws SQLException;
+    void deleteUser(User user) throws SQLException;
     User getUserById(Long user_id) throws SQLException;
     Collection getAllUsers() throws SQLException;
-    void deleteUser(User user) throws SQLException;
 }

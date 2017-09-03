@@ -9,7 +9,7 @@ import java.util.Set;
  * Created by ufimtsev on 29.08.2017.
  */
 @Entity
-@Table(name = "dbo.projects")
+@Table(name = "projects")
 public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

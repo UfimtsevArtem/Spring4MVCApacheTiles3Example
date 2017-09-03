@@ -11,8 +11,8 @@ import java.util.Collection;
  */
 public interface TaskService {
     void addTask(Task task) throws SQLException;
-    void updateTask(Long task_id, Task task) throws SQLException;
-    Task getTaskById(Long task_id) throws SQLException;
+    void saveOrUpdateTask(Task task) throws SQLException;
     Collection getAllTasks() throws SQLException;
     void deleteTask(Task task) throws SQLException;
+    void updateTaskWithParams(Task task) throws SQLException;
 }

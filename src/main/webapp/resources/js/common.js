@@ -109,30 +109,35 @@ $(document).ready(function () {
     $(".edit-project-btn-showP").on("click", function () {
         window.location.href = "/editProject?id="+this.value;
     });
+
+
+
     $(".edit-task-btn-showP").on("click", function () {
-        window.location.href = "/editProject?id="+this.value;
+        window.location.href = "/editTask?id="+this.value;
     });
 
-    $(".edit-project-btn-edit").on("click", function () {
+    $(".edit-task-btn-edit").on("click", function () {
         var result = {};
-        $.each($('.edit-project-form-edit').serializeArray(), function() {
+        $.each($('.edit-task-form-edit').serializeArray(), function() {
             result[this.name] = this.value;
         });
+        var taskId = $('.task-id-value').attr("data-id");
         $.ajax({
-            url: "/editProject.do",
+            url: "/editTask.do",
             type: "POST",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(result), //Stringified Json Object
             cache: false,    //This will force requested pages not to be cached by the browser
             processData: false, //To avoid making query String instead of JSON
             success: function (resposeJsonObject) {
-                window.location.href = "/";
+                window.location.href = "/showTask?id="+taskId;
             },
             error: function () {
                 alert("error edit")
             }
         });
     });
+
     $(".cancel-project-btn").on("click", function () {
         history.go(-1);
     });

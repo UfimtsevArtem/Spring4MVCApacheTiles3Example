@@ -32,6 +32,8 @@ public class AppConfig {
         dataSource.setUrl(env.getProperty("db.url"));
         dataSource.setUsername(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
+        dataSource.setMaxIdle(4);
+        dataSource.setMaxWaitMillis(10000);
         return dataSource;
     }
 

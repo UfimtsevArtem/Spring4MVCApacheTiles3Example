@@ -13,9 +13,8 @@ import java.util.Collection;
  */
 public interface TaskDao {
     void addTask(Task task) throws SQLException;
-    void updateTask(Long task_id, Task task) throws SQLException;
-    Task getTaskById(Long task_id) throws SQLException;
-    Collection getAllTasks() throws SQLException;
     void deleteTask(Task task) throws SQLException;
+    void saveOrUpdateTask(Task task) throws SQLException;
+    Collection getAllTasks() throws SQLException;
     Query createQuery(String hql);
 }

@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by ufimtsev on 29.08.2017.
  */
 @Entity
-@Table(name = "dbo.comments")
+@Table(name = "comments")
 public class Comment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

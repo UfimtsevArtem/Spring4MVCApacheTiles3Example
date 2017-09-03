@@ -517,7 +517,7 @@
                         </tfoot>
                         <tbody>
                         <c:forEach items="${tasks}" var="task">
-                            <c:url var="editUrl" value="/editTask?id=${task.taskId}" />
+                            <c:url var="editUrl" value="/showTask?id=${task.taskId}" />
                             <tr id="${task.taskId}">
                                 <td><c:out value="${task.taskId}"/></td>
                                 <td data-toggle="tooltip" data-placement="bottom" title="${task.taskName}">

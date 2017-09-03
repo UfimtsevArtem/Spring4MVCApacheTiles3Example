@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by ufimtsev on 29.08.2017.
  */
 @Entity
-@Table(name = "dbo.status")
+@Table(name = "status")
 public class Status implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -29,11 +29,15 @@ public class TaskServiceImp implements TaskService {
     }
     @Transactional
     @Override
-    public void updateTask(Long task_id, Task task) throws SQLException {
-        taskDao.updateTask(task_id, task);
+    public void deleteTask(Task task) throws SQLException {
+        taskDao.deleteTask(task);
+    }
+    @Transactional
+    @Override
+    public void saveOrUpdateTask(Task task) throws SQLException {
+        taskDao.saveOrUpdateTask(task);
     }
     @Transactional(readOnly = true)
-    @Override
     public Task getTaskById(Long task_id) throws SQLException {
         Query<Task> query=taskDao.createQuery("Select t from Task t left join fetch t.comments left join fetch t.workers where t.taskId = :id");
         query.setParameter("id", task_id);
@@ -47,7 +51,11 @@ public class TaskServiceImp implements TaskService {
     }
     @Transactional
     @Override
-    public void deleteTask(Task task) throws SQLException {
-        taskDao.deleteTask(task);
+    public void updateTaskWithParams(Task task) throws SQLException {
+        Query query = taskDao.createQuery("Update Task t set t.taskName = :name, t.taskDescription = :description where t.taskId = :id");
+        query.setParameter("name", task.getTaskName());
+        query.setParameter("description", task.getTaskDescription());
+        query.setParameter("id", task.getTaskId());
+        query.executeUpdate();
     }
 }

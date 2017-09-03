@@ -28,8 +28,8 @@ public class TaskDaoImp implements TaskDao {
     }
 
     @Override
-    public void updateTask(Long task_id, Task task) throws SQLException {
-        sessionFactory.getCurrentSession().update(task);
+    public void saveOrUpdateTask(Task task) throws SQLException {
+        sessionFactory.getCurrentSession().saveOrUpdate(task);
     }
 
     @Override
