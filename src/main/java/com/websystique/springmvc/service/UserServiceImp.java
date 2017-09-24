@@ -12,7 +12,7 @@ import java.util.Collection;
 /**
  * Created by ufimtsev on 29.08.2017.
  */
-@Service
+@Service("userService")
 public class UserServiceImp implements UserService {
 
     private final UserDao userDao;
@@ -36,6 +36,12 @@ public class UserServiceImp implements UserService {
     public User getUserById(Long user_id) throws SQLException {
         return userDao.getUserById(user_id);
     }
+    @Transactional
+    @Override
+    public User findByUserName(String userName) throws SQLException {
+        return userDao.findByUserName(userName);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Collection getAllUsers() throws SQLException {

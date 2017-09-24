@@ -23,18 +23,13 @@ public class TaskDaoImp implements TaskDao {
     }
 
     @Override
-    public void addTask(Task task) throws SQLException {
-        sessionFactory.getCurrentSession().save(task);
+    public Task addTask(Task task) throws SQLException {
+        return sessionFactory.getCurrentSession().get(Task.class, sessionFactory.getCurrentSession().save(task));
     }
 
     @Override
     public void saveOrUpdateTask(Task task) throws SQLException {
         sessionFactory.getCurrentSession().saveOrUpdate(task);
-    }
-
-    @Override
-    public Task getTaskById(Long task_id) throws SQLException {
-        return sessionFactory.getCurrentSession().load(Task.class, task_id);
     }
 
     @Override

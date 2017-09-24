@@ -15,5 +15,6 @@ public interface ProjectService {
     void saveOrUpdateProject(Project project) throws SQLException;
     void updateProjectWithParams(Project project) throws SQLException;
     Project getProjectById(Long project_id) throws SQLException;
+    Collection getProjectsByUserId(Long user_id) throws SQLException;
     Collection getAllProjects() throws SQLException;
 }
